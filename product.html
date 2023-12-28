@@ -1,0 +1,578 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" rel="stylesheet">
+    <style type="text/tailwindcss">
+
+        @layer base {
+                * ,html {
+                    font-family: 'Montserrat', sans-serif !important;
+                }
+                .text-primary{
+                   @apply text-[#302D2D] !important;
+                }
+                .bg-primary{
+                    @apply bg-[#EFEFEF]  !important;
+                }
+                @media (min-width:450px) {
+                    .xs-hidden {
+                        @apply hidden !important;
+                    }
+                }
+            }
+
+            @layer components {
+                .tab-content {
+                    @apply hidden;
+                }
+                a.font-bold {
+                font-weight: 700 !important;
+                }
+                .gradient-text {
+                    @apply text-transparent bg-clip-text bg-gradient-to-r from-[#10E9E9] to-[#C8009C];
+                }
+                .container-wrapper {
+                    @apply container lg:px-9 mx-auto px-4;
+                }
+                section.section {
+                    @apply md:py-[120px] py-[60px];
+                }
+                section.testimonial_section {
+                    @apply md:pt-[120px] xl:py-[80px] lg:py-[60px] py-[60px];
+                }
+                .gradient-bg {
+                    @apply bg-gradient-to-r from-[#10E9E9] to-[#C8009C];
+                }
+                .accordian-arrow:after {
+                    content: '';
+                    background: url(assets/images/arrow-icon.svg) no-repeat center right;
+                    transition: .3s ease;
+                    @apply float-right absolute right-0 top-[12%] bg-cover w-[21.33px] h-[18.67px];
+                }
+                div:has(.active.accordian-arrow) {
+                    opacity: 1 !important;
+                }
+                .active.accordian-arrow:after {
+                    transform: rotate(90deg);
+                }
+                .active.accordian-arrow {
+                    @apply opacity-100;
+                }
+                .hamburger {
+                    @apply h-[20px] w-[21px] flex justify-center items-center gap-[3.5px];
+                }
+                .hamburger span{
+                    transition: all .3s ease;
+                    @apply bg-gradient-to-r from-[#10E9E9] to-[#C8009C] relative rounded-sm block w-full h-[2.33px];
+                }
+                .hamburger > span:nth-child(2) {
+                    @apply flex gap-[3px] w-[16.33px] items-center justify-between self-end h-[2.4px];
+                }
+                .hamburger > span:nth-child(2):before {
+                    content: '';
+                    @apply h-[2.4px] w-[2.4px] absolute -left-[4.5px] bg-[#10E9E9] rounded-full;
+                }
+               
+                header.toggleMenu .mobile-menu a{
+                    @apply text-2xl font-semibold text-white;
+                }
+                header.toggleMenu .hamburger > span:nth-child(2) {
+                    display: none;
+                }
+                header.toggleMenu .hamburger > span:nth-child(1) {
+                    transform: rotate(225deg) translate(0, -4px);
+                }
+                header.toggleMenu .hamburger > span:nth-child(3) {
+                    transform: rotate(-45deg) translate(0, -4px);
+                }
+                .web_growth{
+                    @apply flex md:gap-10 gap-6 w-full items-end xl:max-w-[63%];
+                }
+                .web_growth > .w3Box{
+                    @apply basis-1/5 gradient-bg lg:rounded-2xl rounded-xl md:max-h-[128px] md:min-h-[68px] max-h-[68px] min-h-[48px] w-full min-w-[100px] md:min-w-[128px] flex items-center lg:mt-0;
+                }
+                .web_growth > .w3Box > img{
+                    @apply block w-full lg:-mt-[41px] md:-mt-[47px];
+                }
+                nav{
+                    @apply relative z-40;
+                }
+                .header-bg{
+                    background-image: url('assets/images/product-banner.png');
+                    @apply bg-no-repeat bg-right-top absolute right-0 left-0 top-0 -bottom-[90px] bg-contain;
+                }
+                @media (min-width: 1024px) {
+                    .transformTestimonial {
+                        transform: translate(-16px, -54px);
+                    }
+                }
+                @media (min-width: 1440px) {
+                    .container-wrapper {
+                        @apply max-w-[1280px];
+                    }
+                    .header-bg{
+                        @apply -bottom-[125px];
+                    }
+                }
+                @media (max-width:767px) {
+                    header .navigation {
+                        background: url('./assets/images/menu-bg.png') no-repeat center bottom;
+                        @apply rounded-3xl hidden fixed w-[90%] bottom-0 z-40 top-[92px] bg-cover h-[80vh];
+                    }
+                    header .mobile-menu {
+                        @apply flex flex-col items-center justify-center h-full gap-[64px];
+                    }
+                    .accordian-arrow:after {
+                    @apply  w-[16px] h-[14px] top-[30%];
+                    }
+                    img.menuLogo {
+                        z-index: -1;
+                        @apply absolute bottom-0 w-full h-[80%] -right-[33%];
+                    }
+                    .overlay{
+                        @apply bg-primary fixed bottom-0 -left-[15px] -right-[15px] z-10 hidden top-[75px];
+                    }
+                }
+                @media (min-width:768px) and (max-width:1024px){
+                    .header-bg{
+                        @apply bottom-0;
+                    }
+                }
+                @media (max-width:767px){
+                    .header-bg{
+                        background-image: url('assets/images/product-banner-mobile.png');
+                        @apply top-[110px] bottom-[44px];
+                    }
+                    .banner-bg h1{
+                        @apply relative;
+                    }
+                    .banner-bg h1:after {
+                        filter: blur(72px);
+                        content: '';
+                        z-index: -1;
+                        @apply bg-[#EBD9D9] block w-[233px] h-[222px] -left-[61px] absolute top-[82px];
+                    }
+                }
+            }
+    </style>
+</head>
+
+<body>
+    <header class="bg-primary relative lg:pt-10 pt-6 lg:pb-[90px] pb-[160px]">
+        <div class="container-wrapper">
+            <nav class="flex flex-1 items-center justify-between md:justify-start md:gap-[73px]">
+                <div class="flex items-center gap-4">
+                    <div class="md:hidden hamburger flex-col">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="flex flex-shrink-0 items-center text-primary leading-loose text-2xl font-medium">
+                        <a href="#">Potluck</a>
+                    </div>
+                </div>
+                <div class="hidden md:block navigation">
+                    <div class="flex gap-6 text-primary font-medium mobile-menu">
+                        <a href="#" class="gradient-text md:font-bold hover:gradient-text text-sm">Home</a>
+                        <a href="#" class="hover:gradient-text text-sm">How it works</a>
+                        <a href="#" class="hover:gradient-text text-sm">Party types</a>
+                        <a href="#" class="hover:gradient-text text-sm">FAQ</a>
+                        <img src="./assets/images/potluck.svg" alt="Potluck" class="menuLogo md:hidden block">
+                    </div>
+                </div>
+                <div class="overlay hidden"></div>
+                <div>
+                    <a href="#" class="gradient-text font-bold text-sm">Learn more
+                        <img src="assets/images/arrow-icon.svg" alt="aroow" class="inline-block ml-3 w-[13.33px]"></a>
+                </div>
+            </nav>
+        </div>
+        <div class="banner-bg relative">
+            <div class="container-wrapper flex">
+                <div class="lg:w-[70%] flex flex-col lg:mt-[90px] md:mt-16 mt-20 z-20">
+                    <h2 class="m-0 lg:text-[180px] md:text-[120px] text-[52px] tracking-[-.02em] leading-none font-semibold">
+                        <span class="text-primary inline-block">Potluck -</span>
+                    </h2>
+                    <h1 class="xl:text-[120px] lg:text-[100px] text-[52px] font-semibold leading-none">
+                        <div class="relative z-10"><span class="gradient-text inline-block pb-2">revive your <br
+                                    class="xl:block hidden"> community</span>
+                        </div>
+                        <div class="relative lg:whitespace-nowrap z-20 text-white"><span class="underline">with NFTs
+                            </span></div>
+                    </h1>
+                    <div class="text-sm leading-loose font-medium text-primary lg:max-w-[70%] max-w-[58%] lg:mt-[50px] mt-10">
+                        Potluck is the web3 marketing growth platform where your current and potential community members
+                        can be reengaged / acquired by joining Potluck parties.
+                    </div>
+                </div>
+                <div class="lg-w-[30%]">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="header-bg"></div>
+
+    </header>
+    <section class="bg-white section">
+        <div class="container-wrapper">
+            <div class="flex items-center lg:flex-nowrap flex-wrap lg:gap-0 gap-6 h-auto">
+                <div
+                    class="lg:flex lg:-rotate-[89deg] lg:basis-1/4 md:flex-col md:items-start items-end lg:gap-0 gap-2 text-start lg:-ml-36">
+                    <h3
+                        class="m-0 md:text-[80px] text-[32px] text-primary tracking-[-.02em] leading-[1.2] font-semibold">
+                        Web3 project growth</h3>
+                    <h2
+                        class="m-0 lg:text-[180px] md:text-[120px] text-[52px] tracking-[-.02em] leading-none font-semibold whitespace-nowrap">
+                        <span class="gradient-text">is hard</span>
+                    </h2>
+                </div>
+                <div class="lg:basis-3/4 w-full flex flex-col lg:gap-[146px] gap-6 lg:-ml-12">
+                    <div class="text-sm font-medium text-primary leading-loose lg:max-w-[260px] lg:pr-0 pr-20">
+                        Giveaway NFT/Tokens in exchange for Twitter follow, retweet...
+                    </div>
+                    <div class="flex flex-col lg:gap-[80px] gap-0">
+                        <div class="web_growth md:mt-0 -mt-5">
+                            <div class="w3Box mt-16">
+                                <img data-aos="fade-up" data-aos-delay="300" src="assets/images/trash.png" class="-mt-[38px]" alt="Email" />
+                            </div>
+                            <div class="basis-5/6 w-full flex flex-col">
+                                <div class="font-semibold text-primary tracking-[-.04em] md:text-2xl text-base">Just a
+                                    lot of garbage followers = no attribution</div>
+                            </div>
+                        </div>
+                        <div class="web_growth lg:self-center">
+                            <div class="w3Box mt-12">
+                                <img data-aos="fade-up" data-aos-delay="400" src="assets/images/lamp.png" class="-mt-[38px]" alt="Certificate" />
+                            </div>
+                            <div class="basis-4/5 w-full flex flex-col">
+                                <div class="font-semibold text-primary tracking-[-.04em] md:text-2xl text-base">No
+                                    engagement for current members / contributors</div>
+                            </div>
+                        </div>
+                        <div class="web_growth lg:self-end">
+                            <div class="w3Box mt-12">
+                                <img data-aos="fade-up" data-aos-delay="500" src="assets/images/dislike.png" class="-mt-[38px]" alt="Trophy" />
+                            </div>
+                            <div class="md:basis-2/5 basis-4/5 w-full flex">
+                                <div class="font-semibold text-primary tracking-[-.04em] md:text-2xl text-base">Just
+                                    sucks... Why is it so bored?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-primary section">
+        <div class="container-wrapper">
+            <h2 class="m-0 lg:text-[180px] md:text-[120px] text-[52px] tracking-[-.02em] leading-none font-semibold">
+                <span class="gradient-text inline-block">Potluck <br class="hidden md:block"> NFT</span>
+                <span
+                    class="m-0 lg:text-[80px] md:text-[60px] text-[32px] text-primary tracking-[-.02em] leading-[1.2] font-semibold text-center lg:-ml-[330px] md:-ml-[235px]">
+                    is the solution </span>
+            </h2>
+            <div class="w-full flex md:gap-[18px] gap-12 md:mt-20 mt-32 lg:flex-nowrap flex-wrap">
+                <div class="flex md:gap-10 gap-6 w-full items-start flex-col lg:basic-auto md:basis-[48%]">
+                    <div class="gradient-bg lg:rounded-3xl rounded-2xl flex items-center w-full h-[140px]">
+                        <img data-aos="fade-up" data-aos-delay="300" src="assets/images/attribution.svg"
+                            class="block w-full xl:-mt-[93px] -mt-[106px] max-h-[246px]" alt="Email" />
+                    </div>
+                    <div class="w-full flex flex-col text-center">
+                        <div class="font-semibold text-primary tracking-[-.04em] text-2xl">Attribution</div>
+                        <div
+                            class="text-sm font-medium text-primary leading-loose mt-2 lg:max-w-[87%] max-w-[60%] mx-auto">
+                            Audience must have the specific NFT by project</div>
+                    </div>
+                </div>
+                <div
+                    class="flex md:gap-10 gap-6 w-full items-start flex-col lg:basic-auto md:basis-[48%] lg:mt-0 md:-mt-[48px]">
+                    <div
+                        class="gradient-bg lg:rounded-3xl rounded-2xl lg:mt-0 mt-12 flex items-center w-full h-[140px]">
+                        <img data-aos="fade-up" data-aos-delay="400" src="assets/images/invite.svg" class="block sm:w-full w-auto xl:-mt-[93px] sm:-mt-[106px] -mt-[94px] max-h-[246px] mx-auto"
+                            alt="Certificate" />
+                    </div>
+                    <div class="w-full flex flex-col text-center">
+                        <div class="font-semibold text-primary tracking-[-.04em] text-2xl">Invites, awards</div>
+                        <div
+                            class="text-sm font-medium text-primary leading-loose mt-2 lg:max-w-[87%] max-w-[75%] mx-auto">
+                            Each activity includes social network effect</div>
+                    </div>
+                </div>
+                <div class="flex md:gap-10 gap-6 w-full items-center flex-col lg:basic-auto md:basis-[48%]">
+                    <div
+                        class="gradient-bg lg:rounded-3xl rounded-2xl lg:mt-0 mt-12 flex items-center w-full h-[140px]">
+                        <img data-aos="fade-up" data-aos-delay="500" src="assets/images/setting.svg"
+                            class="block sm:w-full w-auto xl:-mt-[93px] sm:-mt-[106px] -mt-[94px] max-h-[246px] mx-auto" alt="Trophy" />
+                    </div>
+                    <div class="w-full flex flex-col text-center">
+                        <div class="font-semibold text-primary tracking-[-.04em] text-2xl">Reengagement</div>
+                        <div
+                            class="text-sm font-medium text-primary leading-loose mt-2 lg:max-w-[87%] max-w-[75%] mx-auto">
+                            Activities after minting NFTs is the key for projects</div>
+                    </div>
+                </div>
+                <div class="flex md:gap-10 gap-6 w-full items-center flex-col lg:basic-auto md:basis-[48%]">
+                    <div
+                        class="gradient-bg lg:rounded-3xl rounded-2xl lg:mt-0 mt-12 flex items-center w-full h-[140px]">
+                        <img data-aos="fade-up" data-aos-delay="600" src="assets/images/fun.svg" class="block sm:w-full w-auto xl:-mt-[93px] sm:-mt-[106px] -mt-[94px] max-h-[246px] mx-auto"
+                            alt="Trophy" />
+                    </div>
+                    <div class="w-full flex flex-col text-center">
+                        <div class="font-semibold text-primary tracking-[-.04em] text-2xl">Fun</div>
+                        <div
+                            class="text-sm font-medium text-primary leading-loose mt-2 lg:max-w-[80%] max-w-[75%] mx-auto">
+                            Bring back enthusiasm to NFT again, beyond speculation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-white testimonial_section">
+        <div class="container-wrapper md:pr-4 pr-0">
+            <h2
+                class="m-0 xl:text-[180px] lg:text-[150px] md:text-[120px] text-[52px] tracking-[-.02em] leading-none font-semibold text-center">
+                <span class="gradient-text">Testimonial</span>
+            </h2>
+            <div x-data="{swiper: null}" x-init="swiper = new Swiper($refs.container, {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 0,
+  
+      breakpoints: {
+        320: {
+          slidesPerView: 1.1,
+          spaceBetween: 0,
+        },
+        640: {
+            slidesPerView: 1.5,
+            spaceBetween: 0,
+          },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 0,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 0,
+        },
+      },
+    })" class="relative w-full mx-auto flex flex-row transformTestimonial lg:mt-0 mt-6">
+                <div class="absolute inset-y-0 left-0 z-10 md:flex items-center hidden">
+                    <button @click="swiper.slidePrev()"
+                        class="gradient-bg -ml-2 lg:-ml-0 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
+                        <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M12.8334 6.83335H2.94592L5.97342 10.4667C6.26841 10.82 6.22008 11.3459 5.86675 11.64C5.51258 11.935 4.98758 11.8867 4.69258 11.5334L0.525916 6.53335C0.493416 6.49419 0.477583 6.44835 0.453416 6.40502C0.433416 6.37002 0.409249 6.34002 0.394249 6.30169C0.35675 6.20585 0.334249 6.10502 0.334249 6.00335C0.334249 6.00252 0.333416 6.00085 0.333416 6.00002C0.333416 5.99919 0.334249 5.99752 0.334249 5.99669C0.334249 5.89502 0.35675 5.79419 0.394249 5.69835C0.409249 5.66002 0.433416 5.63002 0.453416 5.59502C0.477583 5.55169 0.493416 5.50585 0.525916 5.46669L4.69258 0.466687C4.85842 0.269187 5.09508 0.166687 5.33342 0.166687C5.52175 0.166687 5.71092 0.23002 5.86675 0.36002C6.22008 0.654187 6.26841 1.18002 5.97342 1.53335L2.94592 5.16669H12.8334C13.2934 5.16669 13.6667 5.54002 13.6667 6.00002C13.6667 6.46002 13.2934 6.83335 12.8334 6.83335Z"
+                                fill="white" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="swiper-container w-full" x-ref="container">
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide md:px-6 px-3">
+                            <div class="flex flex-col rounded-2xl overflow-hidden bg-primary">
+                                <div class="flex-shrink-0">
+                                    <blockquote class="rounded-2xl p-8">
+                                        <div class="flex items-start flex-col gap-5">
+                                            <img alt="Man"
+                                                src="./assets/images/testi1.png"
+                                                class="h-[72px] w-[72px] rounded-full object-cover" />
+                                            <p class="mt-1 text-base font-semibold text-primary m-0 -tracking-[.04em]">
+                                                Paul Mitchel</p>
+                                        </div>
+                                        <p class="mt-2 text-sm font-medium leading-loose opacity-80 text-primary">
+                                            Art reflects an intelligible conflict. The locality methodologically
+                                            considers intelligence 🚀🚀🚀 Delusion transposes an ontological sign,
+                                            changing the habitual reality 🤑
+                                        </p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide md:px-6 px-3">
+                            <div class="flex flex-col rounded-2xl overflow-hidden  h-full bg-primary">
+                                <div class="flex-shrink-0">
+                                    <blockquote class="rounded-2xl p-8">
+                                        <div class="flex items-start flex-col gap-5">
+                                            <img alt="Man"
+                                                src="./assets/images/testi2.png"
+                                                class="h-[72px] w-[72px] rounded-full object-cover" />
+                                            <p class="mt-1 text-base font-semibold text-primary m-0 -tracking-[.04em]">
+                                                Steave Carron</p>
+                                        </div>
+                                        <p class="mt-2 text-sm font-medium leading-loose opacity-80 text-primary">
+                                            The locality methodologically considers intelligence. Delusion transposes an
+                                            ontological sign, changing the habitual reality 🔥🔥🔥
+                                        </p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide md:px-6 px-3">
+                            <div class="flex flex-col rounded-2xl overflow-hidden h-full bg-primary">
+                                <div class="flex-shrink-0">
+                                    <blockquote class="rounded-2xl p-8">
+                                        <div class="flex items-start flex-col gap-5">
+                                            <img alt="Man"
+                                                src="./assets/images/testi3.png"
+                                                class="h-[72px] w-[72px] rounded-full object-cover" />
+                                            <p class="mt-1 text-base font-semibold text-primary m-0 -tracking-[.04em]">
+                                                Amanda Smith</p>
+                                        </div>
+                                        <p class="mt-2 text-sm font-medium leading-loose opacity-80 text-primary">
+                                            Art reflects an intelligible conflict. The locality methodologically
+                                            considers intelligence 👍
+                                        </p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute inset-y-0 right-0 z-10  md:flex items-center hidden">
+                    <button @click="swiper.slideNext()"
+                        class="gradient-bg -mr-2 lg:-mr-0 flex justify-center items-center w-10 h-10 rounded-full shadow focus:outline-none">
+                        <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M1.16683 6.83335H11.0543L8.02683 10.4667C7.73183 10.82 7.78016 11.3459 8.13349 11.64C8.48766 11.935 9.01266 11.8867 9.30766 11.5334L13.4743 6.53335C13.5068 6.49419 13.5227 6.44835 13.5468 6.40502C13.5668 6.37002 13.591 6.34002 13.606 6.30169C13.6435 6.20585 13.666 6.10502 13.666 6.00335C13.666 6.00252 13.6668 6.00085 13.6668 6.00002C13.6668 5.99919 13.666 5.99752 13.666 5.99669C13.666 5.89502 13.6435 5.79419 13.606 5.69835C13.591 5.66002 13.5668 5.63002 13.5468 5.59502C13.5227 5.55169 13.5068 5.50585 13.4743 5.46669L9.30766 0.466687C9.14183 0.269187 8.90516 0.166687 8.66683 0.166687C8.4785 0.166687 8.28933 0.23002 8.13349 0.36002C7.78016 0.654187 7.73183 1.18002 8.02683 1.53335L11.0543 5.16669H1.16683C0.706829 5.16669 0.333496 5.54002 0.333496 6.00002C0.333496 6.46002 0.706829 6.83335 1.16683 6.83335Z"
+                                fill="white" />
+                        </svg>
+
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="bg-primary section">
+        <div class="container-wrapper">
+            <div class="flex items-center lg:flex-nowrap flex-wrap lg:gap-0 gap-6">
+                <div class="flex lg:-rotate-[89deg] lg:basis-1/5 w-full">
+                    <h2
+                        class="m-0 lg:text-[180px] md:text-[120px] text-[52px] tracking-[-.02em] leading-none font-semibold">
+                        <span class="gradient-text">FAQ</span>
+                    </h2>
+                </div>
+                <div class="lg:basis-4/5 w-full">
+                    <div class="tab w-full bg-white rounded-2xl lg:p-6 px-[16px] py-[18px]">
+                        <div class="block tracking-[-0.04em] font-semibold lg:text-2xl text-[20px] cursor-pointer accordian-arrow relative">
+                            Any fees required to join?</div>
+                        <div class="tab-content leading-loose">
+                            <p class="lg:pt-6 pt-4 text-sm font-medium opacity-80">We never give or sell your
+                                information to others, even to sponsors. The data when you proceed on Potluck app will
+                                only use for notifications when you will be eligible to apply other parties, so it can
+                                be opted out</p>
+                        </div>
+                    </div>
+                    <div class="tab w-full mt-2 md:mt-5 bg-white rounded-2xl lg:p-6 px-[16px] py-[18px]">
+                        <div class="block tracking-[-0.04em] font-semibold lg:text-2xl text-[20px] cursor-pointer accordian-arrow relative">
+                            I have concern about my <br class="xs-hidden inline-block"> privacy</div>
+                        <div class="tab-content leading-loose">
+                            <p class="lg:pt-6 pt-4 text-sm font-medium opacity-80">We never give or sell your
+                                information to others, even to sponsors. The data when you proceed on Potluck app will
+                                only use for notifications when you will be eligible to apply other parties, so it can
+                                be opted out</p>
+                        </div>
+                    </div>
+                    <div class="tab w-full mt-2 md:mt-5 bg-white rounded-2xl lg:p-6 px-[16px] py-[18px]">
+                        <div class="block tracking-[-0.04em] font-semibold lg:text-2xl text-[20px] cursor-pointer accordian-arrow relative">
+                            Is my NFT safe?</div>
+                        <div class="tab-content leading-loose">
+                            <p class="lg:pt-6 pt-4 text-sm font-medium opacity-80">We never give or sell your
+                                information to others, even to sponsors. The data when you proceed on Potluck app will
+                                only use for notifications when you will be eligible to apply other parties, so it can
+                                be opted out</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="bg-black md:pt-8 md:pb-9 py-6">
+        <div class="container-wrapper">
+            <div class="flex items-center text-white font-normal lg:flex-nowrap flex-wrap md:gap-0 justify-between">
+                <div class="order-1 text-[20px] font-medium">
+                    <a href="#">Potluck</a>
+                </div>
+                <div class="lg:order-2 order-3 text-sm lg:w-auto w-full lg:mt-0 mt-4 opacity-60">
+                    All right reserved © Copyright 2022
+                </div>
+                <div class="lg:order-3 order-4 text-sm lg:w-auto w-full lg:mt-0 mt-4 opacity-60">
+                    <div class="flex gap-11">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+                <div class="lg:order-4 order-2 text-[20px]">
+                    <div class="flex gap-11 justify-end">
+                        <a href="#">
+                            <img src="assets/images/twitter.svg" alt="Twitter" />
+                        </a>
+                        <a href="#">
+                            <img src="assets/images/Vector.svg" alt="Vector" />
+                        </a>
+                        <a href="#">
+                            <img src="assets/images/medium.svg" alt="medium" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+    <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".tab > .block").click(function () {
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active');
+                    $('.tab').siblings().toggleClass('opacity-50');
+                    $(this).next().slideUp();
+                } else {
+                    $(".tab-content").slideUp();
+                    $(".tab > .block").removeClass('active');
+                    $(this).addClass('active');
+                    $(this).next().slideDown();
+                    $('.tab').siblings().addClass('opacity-50');
+                }
+            });
+            $(".mobile-menu a").click(function () {
+                $('.mobile-menu > a').removeClass('gradient-text').removeClass('md:font-bold').removeClass('font-semibold');
+                $(this).addClass('gradient-text').addClass('md:font-bold').addClass('font-semibold');
+            });
+            $(".hamburger").click(function () {
+                $('header').toggleClass('toggleMenu');
+                $('.navigation').fadeToggle();
+                $('.overlay').fadeToggle();
+                $('body').toggleClass('overflow-hidden');
+            });
+
+            AOS.init();
+        });
+    </script>
+</body>
+
+</html>

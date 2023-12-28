@@ -1,0 +1,668 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style type="text/tailwindcss">
+        @layer base {
+                * ,html {
+                    font-family: 'Montserrat', sans-serif !important;
+                }
+                @media (min-width:450px) {
+                    .xs-hidden {
+                        display: none !important;
+                    }
+                }
+            }
+
+            @layer components {
+                .tab-content {
+                    @apply hidden;
+                }
+                a.font-bold {
+                font-weight: 700 !important;
+                }
+                .gradient-text {
+                    @apply text-transparent bg-clip-text bg-gradient-to-r from-[#10E9E9] to-[#C8009C];
+                }
+                .logo-wrapper>div {
+                    @apply bg-[#EFEFEF] rounded-2xl md:w-full h-[80px] flex-shrink-0 md:flex-shrink;
+                }
+
+                .logo-wrapper>div {
+                    align-items: flex-start;
+                    justify-content: center;
+                    display: flex;
+                }
+
+                .container-wrapper {
+                    @apply container lg:px-9 mx-auto px-4;
+                }
+                .featured-logos>div {
+                    @apply bg-[#FFFFFF] rounded-2xl h-[80px] flex md:basis-[48.5%] xl:basis-[23.8%] lg:basis-[31.8%] ;
+                }
+
+                .featured-logos>div {
+                    align-items: flex-start;
+                    justify-content: center;
+                }
+
+                section.section {
+                    @apply md:py-[120px] py-[60px];
+                }
+                .gradient-bg {
+                    @apply bg-gradient-to-r from-[#10E9E9] to-[#C8009C];
+                }
+                .partyType_box .nftBox {
+                    @apply flex rounded-3xl gradient-bg basis-1/3 xl:min-h-[168px] min-h-[120px];
+                }
+                .accordian-arrow:after {
+                    content: '';
+                    background: url(assets/images/arrow-icon.svg) no-repeat center right;
+                    transition: .4s ease;
+                    @apply float-right absolute right-0 top-[12%] bg-cover w-[21.33px] h-[18.67px];
+                }
+                .active.accordian-arrow:after {
+                    transform: rotate(90deg);
+                }
+                .active.accordian-arrow {
+                    @apply opacity-100;
+                }
+                .banner-bg {
+                    background: url(assets/images/banner-bg.jpg) no-repeat center bottom;
+                    @apply  bg-cover rounded-[40px] relative min-h-full -top-10 overflow-hidden min-w-[500px];
+                }
+                img.bannerPotluck {
+                    @apply absolute right-0 bottom-0 h-[92%];
+                }
+                .hamburger {
+                    @apply h-[20px] w-[21px] flex justify-center items-center gap-[3.5px];
+                }
+                .hamburger span{
+                    transition: all .3s ease;
+                    @apply bg-gradient-to-r from-[#10E9E9] to-[#C8009C] relative rounded-sm block w-full h-[2.33px];
+                }
+                .hamburger > span:nth-child(2) {
+                    @apply flex gap-[3px] w-[16.33px] items-center justify-between self-end h-[2.4px];
+                }
+                .hamburger > span:nth-child(2):before {
+                    content: '';
+                    @apply h-[2.4px] w-[2.4px] absolute -left-[4.5px] bg-[#10E9E9] rounded-full;
+                }
+               
+                header.toggleMenu .mobile-menu a{
+                    @apply text-2xl font-semibold text-white;
+                }
+                header.toggleMenu .hamburger > span:nth-child(2) {
+                    display: none;
+                }
+                header.toggleMenu .hamburger > span:nth-child(1) {
+                    transform: rotate(225deg) translate(0, -4px);
+                }
+                header.toggleMenu .hamburger > span:nth-child(3) {
+                    transform: rotate(-45deg) translate(0, -4px);
+                }
+                .workCount {
+                    @apply bg-[#EFEFEF] md:rounded-xl rounded-lg md:max-w-[52px] max-w-[40px]  md:text-[20px] text-[16px] text-[#302D2D] opacity-80 font-semibold md:h-[52px] h-[40px] flex items-center justify-center;
+                }
+                .tab:has(.active) {
+                    @apply opacity-100;
+                }
+                @media (min-width:768px){
+                    .swiper-slide{
+                        margin-right: 0 !important;
+                    }
+                    .swiper-wrapper{
+                        transform: none !important;
+                    }
+                    .swiper-slide-duplicate-prev,
+                    .swiper-slide-duplicate{
+                    display: none !important;
+                    }
+                    .swiper-wrapper .swiper-slide-duplicate:first-child{
+                        display: flex !important;
+                        order:2;
+                    }
+                    .swiper-container{
+                        overflow: initial !important;
+                    }
+                    .logo-wrapper>div {
+                        width: 100% !important;
+                    }
+                }
+
+                @media (min-width:1024px) and (max-width:1279px){
+                    .logo-wrapper>div img{
+                        transform: translate(0px, 16px);
+                    }
+                }
+                @media (min-width:1024px) {
+                    .banner-bg {
+                        @apply top-0 min-w-[300px];
+                    }
+                    .logo-wrapper>div {
+                        max-width: 288px;
+                    }
+                }
+                @media (min-width:1200px) {
+                    .banner-bg {
+                        @apply min-w-[400px] top-0 min-h-[688px] ;
+                    }
+                }
+                @media (min-width:1380px) {
+                    .banner-bg {
+                        @apply min-w-[500px] -top-[40px];
+                    }
+                }
+                @media (min-width: 1536px) {
+                    .container-wrapper {
+                        max-width: 1280px;
+                    }
+                }
+                @media (max-width:1023px) {
+                    .banner-bg {
+                        @apply top-5 overflow-hidden min-w-[300px];
+                    }
+                }
+                @media (max-width:767px) {
+                    .banner-bg {
+                        @apply top-[30px] absolute min-w-[43%] right-0 rounded-3xl;
+                    }
+
+                    header .navigation {
+                        background: url('./assets/images/menu-bg.png') no-repeat center bottom;
+                        @apply rounded-3xl hidden fixed w-[90%] bottom-0 z-40 top-[92px] bg-cover h-[80vh];
+                    }
+                    header .mobile-menu {
+                        @apply flex flex-col items-center justify-center h-full gap-[64px];
+                    }
+                    .accordian-arrow:after {
+                        @apply  w-[16px] h-[14px] top-[30%];
+                    }
+                    img.menuLogo {
+                        z-index: -1;
+                        @apply absolute bottom-0 w-full h-[80%] -right-[33%];
+                    }
+                    .overlay{
+                        @apply bg-[#efefef] fixed bottom-0 -left-[15px] -right-[15px] z-10 hidden top-[75px];
+                    }
+                    img.mobPotluck {
+                        @apply h-full absolute bottom-0 left-[50%];
+                    }
+                }
+                @media (max-width:640px) {
+                    .banner-bg {
+                        @apply -right-[15px] rounded-none rounded-tl-3xl rounded-bl-3xl;
+                    }
+                    img.mobPotluck {
+                        @apply h-full absolute bottom-0 left-[20%];
+                    }
+                }
+
+                nav{
+                    position: relative;
+                    z-index:99;
+                }
+
+
+            }
+    </style>
+</head>
+
+<body>
+    <header class="bg-[#EFEFEF] relative lg:pt-10 pt-6 lg:pb-[90px] pb-[42px]">
+        <div class="container-wrapper">
+            <nav class="flex flex-1 items-center justify-between md:justify-start md:gap-[73px]">
+                <div class="flex items-center gap-4">
+                    <div class="md:hidden hamburger flex-col">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="flex flex-shrink-0 items-center text-[#302D2D] leading-loose text-2xl font-medium">
+                        <a href="#">Potluck</a>
+                    </div>
+                </div>
+                <div class="hidden md:block navigation">
+                    <div class="flex gap-6 text-[#302D2D] font-medium mobile-menu">
+                        <a href="#" class="gradient-text md:font-bold hover:gradient-text text-sm">Home</a>
+                        <a href="#" class="hover:gradient-text text-sm">How it works</a>
+                        <a href="#" class="hover:gradient-text text-sm">Party types</a>
+                        <a href="#" class="hover:gradient-text text-sm">FAQ</a>
+                        <img src="./assets/images/potluck.svg" alt="Potluck" class="menuLogo md:hidden block">
+                    </div>
+                </div>
+                <div class="overlay hidden"></div>
+                <div>
+                    <a href="#" class="gradient-text font-bold text-sm">Learn more
+                        <img src="assets/images/arrow-icon.svg" alt="aroow" class="inline-block ml-3 w-[13.33px]"></a>
+                </div>
+            </nav>
+            <div class="relative flex">
+                <div class="lg:w-[62.8%] flex flex-col lg:mt-[90px] md:mt-16 mt-20">
+                    <h1 class="xl:text-[140px] lg:text-[100px] text-7xl font-semibold leading-none">
+                        <div class="text-[#302D2D]">Let<span class="text-[#aa24a7]">’</span>s</div>
+                        <div class="relative z-10 lg:whitespace-nowrap"><span class="gradient-text">bring your</span>
+                        </div>
+                        <div class="relative lg:whitespace-nowrap z-20 text-white"><span class="underline">NFT</span>
+                            together!</div>
+                    </h1>
+                    <div
+                        class="lg:flex lg:items-center lg:justify-between mr-10 mt-[60px] lg:flex-row flex-col-reverse lg:gap-0 gap-6 hidden">
+                        <div class="flex gap-6 items-center">
+                            <a href="#"
+                                class="h-[60px] w-[60px] gradient-bg flex items-center justify-center rounded-full">
+                                <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M1 8H12.865L9.232 12.36C8.878 12.784 8.936 13.415 9.36 13.768C9.785 14.122 10.415 14.064 10.769 13.64L15.769 7.64C15.808 7.593 15.827 7.538 15.856 7.486C15.88 7.444 15.909 7.408 15.927 7.362C15.972 7.247 15.999 7.126 15.999 7.004C15.999 7.003 16 7.001 16 7C16 6.999 15.999 6.997 15.999 6.996C15.999 6.874 15.972 6.753 15.927 6.638C15.909 6.592 15.88 6.556 15.856 6.514C15.827 6.462 15.808 6.407 15.769 6.36L10.769 0.36C10.57 0.123 10.286 0 10 0C9.774 0 9.547 0.076 9.36 0.232C8.936 0.585 8.878 1.216 9.232 1.64L12.865 6H1C0.448 6 0 6.448 0 7C0 7.552 0.448 8 1 8Z"
+                                        fill="white" />
+                                </svg>
+                            </a>
+                            <div class="text-base font-semibold">
+                                <a href="#" class="gradient-text">Go party!</a>
+                            </div>
+                        </div>
+                        <div
+                            class="text-sm leading-loose font-medium text-[#302D2D] lg:text-end lg:max-w-[396px] pt-2 md:pt-0 ">
+                            Potluck is the virtual party place you can enjoy and get rewards by bringing your own NFTs.
+                            Just your address to validate here, nothing needed to stake, etc.
+                        </div>
+                    </div>
+                </div>
+                <div class="banner-bg lg:w-[37.2%]">
+                    <div class="rotateText">
+                        <img src="./assets/images/potluck-banner.svg" alt="Potluck"
+                            class="bannerPotluck md:block hidden">
+                        <img src="./assets/images/mob-potluck.svg" alt="Potluck" class="mobPotluck md:hidden block">
+                    </div>
+                </div>
+            </div>
+            <div class="flex mr-0 pt-[45px] lg:flex-row flex-col-reverse lg:gap-0 gap-6 lg:hidden">
+                <div class="flex gap-6 items-center">
+                    <a href="#" class="h-[60px] w-[60px] gradient-bg flex items-center justify-center rounded-full">
+                        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M1 8H12.865L9.232 12.36C8.878 12.784 8.936 13.415 9.36 13.768C9.785 14.122 10.415 14.064 10.769 13.64L15.769 7.64C15.808 7.593 15.827 7.538 15.856 7.486C15.88 7.444 15.909 7.408 15.927 7.362C15.972 7.247 15.999 7.126 15.999 7.004C15.999 7.003 16 7.001 16 7C16 6.999 15.999 6.997 15.999 6.996C15.999 6.874 15.972 6.753 15.927 6.638C15.909 6.592 15.88 6.556 15.856 6.514C15.827 6.462 15.808 6.407 15.769 6.36L10.769 0.36C10.57 0.123 10.286 0 10 0C9.774 0 9.547 0.076 9.36 0.232C8.936 0.585 8.878 1.216 9.232 1.64L12.865 6H1C0.448 6 0 6.448 0 7C0 7.552 0.448 8 1 8Z"
+                                fill="white" />
+                        </svg>
+                    </a>
+                    <div class="text-base font-semibold">
+                        <a href="#" class="gradient-text">Go party!</a>
+                    </div>
+                </div>
+                <div class="text-sm leading-loose font-medium text-[#302D2D] lg:text-end lg:max-w-[396px]">
+                    Potluck is the virtual party place you can enjoy and get rewards by bringing your own NFTs. Just
+                    your address to validate here, nothing needed to stake, etc.
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-white section">
+        <div class="container-wrapper pr-0 md:pr-4">
+            <div class="flex gap-[28px] md:gap-24 justify-between items-center lg:flex-nowrap flex-wrap ">
+                <div class="text-[32px] text-[#302D2D] font-semibold">
+                    <h4 class="m-0"><span class="text-[52px] gradient-text leading-tight">Trusted</span></h4> by
+                </div>
+                <div class="w-full">
+
+
+                    <div class="relative" x-data="{swiper: null}" x-init="swiper = new Swiper($refs.container, {
+                        loop: true,
+                        slidesPerView: 1,
+                        spaceBetween: 0,
+                    
+                        breakpoints: {
+                             320: {
+                            slidesPerView: 1.2,
+                            spaceBetween: 12,
+                          },
+                          515: {
+                            slidesPerView: 1.4,
+                            spaceBetween: 12,
+                          },
+                          768: {
+                            enabled: false,
+                          },
+                
+                        },
+                      })">
+                        <div class="swiper-container md:w-full pt-10 md:pt-0" x-ref="container">
+                            <div class="swiper-wrapper md:flex md:flex-nowrap md:gap-[18px] md:gap-y-12 logo-wrapper ">
+                                <div class="swiper-slide">
+                                    <img data-aos="fade-up" data-aos-delay="300" src="assets/images/ebuy.svg"
+                                        class="-mt-11 max-w-[80%]" alt="eBay">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img data-aos="fade-up" data-aos-delay="400" src="assets/images/barter.svg"
+                                        class="-mt-8 max-w-[80%]" alt="Barter">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img data-aos="fade-up" data-aos-delay="500" src="assets/images/bet9ja.png"
+                                        class="-mt-11 max-w-[80%]" alt="Bet9Ja">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-[#EFEFEF] section">
+        <div class="container-wrapper pr-0 md:pr-4">
+            <h3
+                class="m-0 md:text-[80px] text-[32px] text-[#302D2D] tracking-[-.02em] leading-[1] font-semibold text-center">
+                Featured</h3>
+            <h2 class="m-0 md:text-[180px] text-[52px] tracking-[-.02em] leading-none font-semibold text-center ">
+                <span class="gradient-text">Parties</span>
+            </h2>
+            <div class="md:mt-[70px] mt-[35px]">
+
+                <div class="relative" x-data="{swiper: null}" x-init="swiper = new Swiper($refs.container, {
+                    loop: true,
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                
+                    breakpoints: {
+                         320: {
+                        slidesPerView: 1.2,
+                        spaceBetween: 12,
+                      },
+                      515: {
+                        slidesPerView: 1.4,
+                        spaceBetween: 12,
+                      },
+                      768: {
+                        enabled: false,
+                      },
+            
+                    },
+                  })">
+                    <div class="swiper-container md:w-full pt-9 md:pt-0" x-ref="container">
+                        <div class="swiper-wrapper md:flex md:flex-wrap md:gap-[18px] md:gap-y-12 featured-logos">
+                            <div class="swiper-slide">
+                                <img data-aos="fade-up" data-aos-delay="300" src="assets/images/monzo-EN-GB.svg"
+                                    class="-mt-5" alt="Monzo" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-aos="fade-up" data-aos-delay="400" src="assets/images/Alibaba_logo.svg"
+                                    class="-mt-6" alt="Alibaba" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-aos="fade-up" data-aos-delay="500" src="assets/images/shopify.svg"
+                                    class="-mt-9" alt="Shopify" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-aos="fade-up" data-aos-delay="600" src="assets/images/gidimo_logo.svg"
+                                    class="-mt-9" alt="Gidimo" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-aos="fade-up" data-aos-delay="300" src="assets/images/access_logo.svg"
+                                    class="-mt-8" alt="Access" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-aos="fade-up" data-aos-delay="400" src="assets/images/axa_mansard.svg"
+                                    class="-mt-3" alt="Axa Logo" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-aos="fade-up" data-aos-delay="500" src="assets/images/fieldinsight_logo.svg"
+                                    class="-mt-4" alt="fieldinsight" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-aos="fade-up" data-aos-delay="600" src="assets/images/fundall_logo.svg"
+                                    class="-mt-5" alt="fundall" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white section">
+        <div class="container-wrapper">
+            <div class="flex items-center lg:flex-nowrap flex-wrap lg:gap-0 gap-8 h-auto">
+                <div
+                    class="flex lg:-rotate-[89deg] lg:basis-1/6 md:flex-col md:items-start items-end lg:gap-0 gap-2 lg:-ml-36">
+                    <h3
+                        class="m-0 md:text-[80px] text-[32px] text-[#302D2D] tracking-[-.02em] leading-[1.2] font-semibold text-center">
+                        How it</h3>
+                    <h2 class="m-0 md:text-[180px] text-[52px] tracking-[-.02em] leading-none font-semibold">
+                        <span class="gradient-text">Works</span>
+                    </h2>
+                </div>
+                <div class="lg:basis-4/5 w-full flex flex-col lg:gap-[88px] md:gap-14 gap-6 lg:-ml-24">
+                    <div class="flex md:gap-10 gap-6 w-full lg:items-end items-start">
+                        <div
+                            class="basis-1/5 gradient-bg lg:rounded-3xl rounded-2xl md:max-h-[93px] md:min-h-[93px] max-h-[52px] min-h-[52px] w-full min-w-[86px] md:min-w-[160px] lg:mt-0 mt-16 flex items-center">
+                            <img data-aos="fade-up" src="assets/images/email.svg"
+                                class="block w-full xl:-mt-[50px] md:-mt-[51px] -mt-[26px]" alt="Email" />
+                        </div>
+                        <div class="basis-5/6 w-full flex flex-col">
+                            <div class="workCount">1</div>
+                            <div class="font-semibold text-[#302D2D] tracking-[-.04em] text-2xl mt-4">Join a party</div>
+                            <div class="text-sm font-medium text-[#302D2D] leading-loose mt-2 lg:max-w-[87%]">Choose one
+                                which is currently held or get an invitation from your friend belonging to the same
+                                community. Each party requires a specific NFT to join</div>
+                        </div>
+                    </div>
+                    <div class="flex md:gap-10 gap-6 w-full lg:items-end items-start">
+                        <div
+                            class="basis-1/5 gradient-bg lg:rounded-3xl rounded-2xl md:max-h-[93px] md:min-h-[93px] max-h-[52px] min-h-[52px] w-full min-w-[86px] md:min-w-[160px] lg:mt-0 mt-12 flex items-center">
+                            <img data-aos="fade-up" src="assets/images/certificate.svg"
+                                class="block w-full xl:-mt-[80px] md:-mt-[71px] -mt-[36px]" alt="Certificate" />
+                        </div>
+                        <div class="basis-4/5 w-full flex flex-col">
+                            <div class="workCount">2</div>
+                            <div class="font-semibold text-[#302D2D] tracking-[-.04em] text-2xl mt-4">Validate your NFT
+                                without gas fee</div>
+                            <div class="text-sm font-medium text-[#302D2D] leading-loose mt-2 lg:max-w-[87%]">Once login
+                                to Potluck, just join the party! No gas fee needed</div>
+                        </div>
+                    </div>
+                    <div class="flex md:gap-10 gap-6 w-full lg:items-end items-start">
+                        <div
+                            class="basis-1/5 gradient-bg lg:rounded-3xl rounded-2xl md:max-h-[93px] md:min-h-[93px] max-h-[52px] min-h-[52px] w-full min-w-[86px] md:min-w-[160px] lg:mt-0 mt-12 flex items-center">
+                            <img data-aos="fade-up" src="assets/images/trophy.svg"
+                                class="block w-full xl:-mt-[80px] md:-mt-[71px] -mt-[36px]" alt="Trophy" />
+                        </div>
+                        <div class="basis-4/5 w-full flex flex-col">
+                            <div class="workCount">3</div>
+                            <div class="font-semibold text-[#302D2D] tracking-[-.04em] text-2xl mt-4">Get reward!</div>
+                            <div class="text-sm font-medium text-[#302D2D] leading-loose mt-2 lg:max-w-[87%]">Small
+                                simple activities in the party and receive rewards such as special NFTs and tokens when
+                                you win!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-[#EFEFEF] section">
+        <div class="container-wrapper">
+            <h3
+                class="m-0 md:text-[80px] text-[32px] text-[#302D2D] tracking-[-.02em] leading-[1] font-semibold text-center">
+                Party</h3>
+            <h2 class="m-0 md:text-[180px] text-[52px] tracking-[-.02em] leading-none font-semibold text-center ">
+                <span class="gradient-text">Types</span>
+            </h2>
+            <div
+                class="flex md:gap-12 gap-4 justify-center items-top md:mt-[200px] mt-[70px] w-full partyType_box flex-wrap lg:flex-nowrap">
+                <div class="flex flex-col gap-6 lg:w-full md:w-[45%] w-full">
+                    <div class="pt-[110px] overflow-hidden md:pt-0 md:overflow-visible">
+                        <div class="nftBox">
+                            <img data-aos="fade-up" data-aos-delay="300" src="assets/images/gift-1.svg"
+                                class="w-full block mx-auto -mt-[110px] max-h-[306px] md:mb-0 -mb-[45px]" alt="Gift" />
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h4 class="m-0 text-[#302D2D] text-2xl font-semibold text-center">Group raffles</h4>
+                        <p class="p-0 text-sm leading-loose font-medium text-center">Join one group and get reward when
+                            it’s selected by lottery</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-6 lg:w-full md:w-[45%] w-full">
+                    <div class="pt-[110px] overflow-hidden md:pt-0 md:overflow-visible">
+                        <div class="nftBox">
+                            <img data-aos="fade-up" data-aos-delay="400" src="assets/images/gift-2.svg"
+                                class="w-full block mx-auto -mt-[110px] max-h-[306px] md:mb-0 -mb-[45px]" alt="Gift" />
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h4 class="m-0 text-[#302D2D] text-2xl font-semibold text-center">NFT tournament</h4>
+                        <p class="p-0 text-sm leading-loose font-medium text-center">Compete for prizes by your NFT</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-6 lg:w-full md:w-[45%] w-full">
+                    <div class="pt-[110px] overflow-hidden md:pt-0 md:overflow-visible">
+                        <div class="nftBox">
+                            <img data-aos="fade-up" data-aos-delay="500" src="assets/images/gift-3.svg"
+                                class="w-full block mx-auto -mt-[110px] max-h-[306px] md:mb-0 -mb-[45px]" alt="Gift" />
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <h4 class="m-0 text-[#302D2D] text-2xl font-semibold text-center">NFT battle</h4>
+                        <p class="p-0 text-sm leading-loose font-medium text-center">Compete for prizes by your NFT</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center md:mt-20">
+                <a href="#" class="gradient-text no-underline font-semibold md:inline hidden">Coming more...</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white section">
+        <div class="container-wrapper">
+            <div class="flex items-center lg:flex-nowrap flex-wrap lg:gap-0 gap-6">
+                <div class="flex lg:-rotate-[89deg] lg:basis-1/5 w-full">
+                    <h2 class="m-0 md:text-[180px] text-[52px] tracking-[-.02em] leading-none font-semibold">
+                        <span class="gradient-text">FAQ</span>
+                    </h2>
+                </div>
+                <div class="lg:basis-4/5 w-full">
+                    <div class="tab w-full bg-[#EFEFEF] rounded-2xl lg:p-6 px-[16px] py-[18px]">
+                        <div
+                            class="block tracking-[-0.04em] font-semibold lg:text-2xl text-[20px] cursor-pointer accordian-arrow relative">
+                            Any fees required to join?</div>
+                        <div class="tab-content leading-loose">
+                            <p class="lg:pt-6 pt-4 text-sm font-medium opacity-80">We never give or sell your
+                                information to others, even to sponsors. The data when you proceed on Potluck app will
+                                only use for notifications when you will be eligible to apply other parties, so it can
+                                be opted out</p>
+                        </div>
+                    </div>
+                    <div class="tab w-full mt-2 md:mt-5 bg-[#EFEFEF] rounded-2xl lg:p-6 px-[16px] py-[18px]">
+                        <div
+                            class="block tracking-[-0.04em] font-semibold lg:text-2xl text-[20px] cursor-pointer accordian-arrow relative">
+                            I have concern about my <br class="xs-hidden inline-block"> privacy</div>
+                        <div class="tab-content leading-loose">
+                            <p class="lg:pt-6 pt-4 text-sm font-medium opacity-80">We never give or sell your
+                                information to others, even to sponsors. The data when you proceed on Potluck app will
+                                only use for notifications when you will be eligible to apply other parties, so it can
+                                be opted out</p>
+                        </div>
+                    </div>
+                    <div class="tab w-full mt-2 md:mt-5 bg-[#EFEFEF] rounded-2xl lg:p-6 px-[16px] py-[18px]">
+                        <div
+                            class="block tracking-[-0.04em] font-semibold lg:text-2xl text-[20px] cursor-pointer accordian-arrow relative">
+                            Is my NFT safe?</div>
+                        <div class="tab-content leading-loose">
+                            <p class="lg:pt-6 pt-4 text-sm font-medium opacity-80">We never give or sell your
+                                information to others, even to sponsors. The data when you proceed on Potluck app will
+                                only use for notifications when you will be eligible to apply other parties, so it can
+                                be opted out</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="bg-black md:pt-8 md:pb-9 py-6">
+        <div class="container-wrapper">
+            <div class="flex items-center text-white font-normal lg:flex-nowrap flex-wrap md:gap-0 justify-between">
+                <div class="order-1 text-[20px] font-medium">
+                    <a href="#">Potluck</a>
+                </div>
+                <div class="lg:order-2 order-3 text-sm lg:w-auto w-full lg:mt-0 mt-4 opacity-60">
+                    All right reserved © Copyright 2022
+                </div>
+                <div class="lg:order-3 order-4 text-sm lg:w-auto w-full lg:mt-0 mt-4 opacity-60">
+                    <div class="flex gap-11">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+                <div class="lg:order-4 order-2 text-[20px]">
+                    <div class="flex gap-11 justify-end">
+                        <a href="#">
+                            <img src="assets/images/twitter.svg" alt="Twitter" />
+                        </a>
+                        <a href="#">
+                            <img src="assets/images/Vector.svg" alt="Vector" />
+                        </a>
+                        <a href="#">
+                            <img src="assets/images/medium.svg" alt="medium" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+    <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".tab > .block").click(function () {
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active');
+                    $('.tab').siblings().toggleClass('opacity-50');
+                    $(this).next().slideUp();
+                } else {
+                    $(".tab-content").slideUp();
+                    $(".tab > .block").removeClass('active');
+                    $(this).addClass('active');
+                    $(this).next().slideDown();
+                    $('.tab').siblings().addClass('opacity-50');
+                }
+            });
+            $(".mobile-menu a").click(function () {
+                $('.mobile-menu > a').removeClass('gradient-text').removeClass('md:font-bold').removeClass('font-semibold');
+                $(this).addClass('gradient-text').addClass('md:font-bold').addClass('font-semibold');
+            });
+            $(".hamburger").click(function () {
+                $('header').toggleClass('toggleMenu');
+                $('.navigation').fadeToggle();
+                $('.overlay').fadeToggle();
+                $('body').toggleClass('overflow-hidden');
+            });
+
+            AOS.init();
+        });
+    </script>
+</body>
+
+</html>
